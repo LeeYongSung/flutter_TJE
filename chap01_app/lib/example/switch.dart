@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
+// void main() {
+//   runApp(MyApp());
+// }
 
 // class MyApp extends StatelessWidget {
 class MyApp extends StatefulWidget {
@@ -14,11 +14,8 @@ class MyApp extends StatefulWidget {
 
 // "_클래스" dart 파일 내부에서만 사용하는 클래스
 class _MyApp extends State<MyApp> {
-  // state
   var switchValue = false;
-  Color _color = Colors.black;
-  String _button = 'test';
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,28 +30,21 @@ class _MyApp extends State<MyApp> {
         // home: 메인(홈) 화면을 지정하는 속성
         home: Scaffold(
             body: Center(
-                child: ElevatedButton(
-          child: Text(_button),
-          style: ButtonStyle(
-              // 버튼 배경색
-              backgroundColor: MaterialStateProperty.all(_color),
-              // 글씨 색
-              foregroundColor: MaterialStateProperty.all(Colors.white)),
-          onPressed: () {
-            print('test 클릭!');
+                // 텍스트 위젯
+                // child: Text('Hello Flutter'
+                //             , textAlign: TextAlign.center
+                //             , style: TextStyle(color: Colors.blue, fontSize: 20),
+                //            )
 
-            if (_color == Colors.black) {
-              setState(() {
-                _color = Colors.red;
-                _button = 'hello';
-              });
-            } else {
-              setState(() {
-                _color = Colors.black;
-                _button = 'test';
-              });
-            }
-          },
-        ))));
+                child: Switch(
+                    value: switchValue, // false
+                    onChanged: (value) {
+                      // switchValue = !switchValue;
+                      // print(switchValue);
+                      // print('test...');
+                      setState(() {
+                        switchValue = value;
+                      });
+                    }))));
   }
 }
