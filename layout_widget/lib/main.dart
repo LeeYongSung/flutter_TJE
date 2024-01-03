@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:layout_widget/models/animalItem.dart';
+import 'package:layout_widget/screens/gridview_screen.dart';
 import 'package:layout_widget/screens/listview_screen.dart';
-import 'package:layout_widget/screens/product_detail_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,18 +10,18 @@ void main() {
 // class MyApp extends StatelessWidget {
 //   const MyApp({super.key});
 
+//   // This widget is the root of your application.
 //   @override
 //   Widget build(BuildContext context) {
 //     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
 //       title: 'Flutter Demo',
 //       theme: ThemeData(
 //         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
 //         useMaterial3: true,
 //       ),
 //       home:
-//           // const ProductDetailScreen(),
-//           const ListViewScreen(),
+//             // const ProductDetailScreen()
+//             const ListViewScreen()
 //     );
 //   }
 // }
@@ -33,45 +33,50 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+class _MyAppState extends State<MyApp> {
   // state
-  List<Animal>? animalList;
+  // List<Animal> animalList = List.empty(growable: true);
+  List<Animal> animalList = [];
 
   @override
   void initState() {
     super.initState();
-    animalList?.add(Animal(
+
+    animalList.add(Animal(
       imagePath: 'image/animal1.jpg',
       animalName: '고양이',
       kind: '포유류',
     ));
-    animalList?.add(Animal(
-      imagePath: 'image/animal1.jpg',
-      animalName: '고양이',
+    animalList.add(Animal(
+      imagePath: 'image/animal2.jpg',
+      animalName: '라쿤',
       kind: '포유류',
     ));
-    animalList?.add(Animal(
-      imagePath: 'image/animal1.jpg',
-      animalName: '고양이',
+    animalList.add(Animal(
+      imagePath: 'image/animal3.jpg',
+      animalName: '늑대',
       kind: '포유류',
     ));
-    animalList?.add(Animal(
-      imagePath: 'image/animal1.jpg',
-      animalName: '고양이',
+    animalList.add(Animal(
+      imagePath: 'image/animal4.jpg',
+      animalName: '코끼리',
       kind: '포유류',
     ));
-    animalList?.add(Animal(
-      imagePath: 'image/animal1.jpg',
-      animalName: '고양이',
-      kind: '포유류',
+    animalList.add(Animal(
+      imagePath: 'image/animal5.jpg',
+      animalName: '벌',
+      kind: '곤충',
     ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: '리스트 뷰',
-      home: ListViewScreen(),
+      home:
+          // ListViewScreen(list: animalList),
+          GridViewScreen(list: animalList),
     );
   }
 }
