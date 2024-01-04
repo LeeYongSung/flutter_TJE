@@ -32,7 +32,11 @@ class _JoinScreenState extends State<JoinScreen> {
   String _date = ''; // 2023/01/01 ~ 2023/01/05
 
   // 수량
-  final TextEditingController _countController = TextEditingController();
+  final TextEditingController _countController =
+      TextEditingController(text: '1');
+  int _count = 1;
+  final int _maxCount = 100;
+  final int _minCount = 1;
 
   // 달력 설정
   // 설정 정보
@@ -266,25 +270,63 @@ class _JoinScreenState extends State<JoinScreen> {
                   ),
                   // 수량
                   TextField(
+                    textAlign: TextAlign.center,
                     controller: _countController,
                     keyboardType: TextInputType.number,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                     ],
                     decoration: InputDecoration(
-                      labelText: '1',
+                      // labelText: '1',
                       prefixIcon: ElevatedButton(
                         onPressed: () {
-                          _countController.text =
-                              ((_countController.text as int) + 1) as String;
+                          if (_maxCount < _count) {
+                            return;
+                          }
+                          setState(() {
+                            _count++;
+                          });
+                          _countController.text = _count.toString();
                         },
                         child: Text('+'),
                       ),
                       suffixIcon: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (_minCount >= _count) {
+                            return;
+                          }
+                          setState(() {
+                            _count--;
+                          });
+                          _countController.text = _count.toString();
+                        },
                         child: Text('-'),
                       ),
                     ),
+                    onChanged: (value) {
+                      // int.parse("10") : String -> int 로 변환
+                      // int.parse("") : 빈 문자열을 int 변환하면 예외발생
+                      // int.tryParse("숫자가아닌문자열") -> 예외 대신 null로 반환
+
+                      int newValue = int.tryParse(value) ?? -1;
+                      // 값이 없을 때
+                      if (newValue == -1) {
+                        setState(() {
+                          _count = 1;
+                        });
+                        return;
+                      }
+                      if (newValue >= _maxCount) {
+                        newValue = _maxCount;
+                      }
+                      if (newValue < _maxCount) {
+                        newValue = _minCount;
+                      }
+                      setState(() {
+                        _count - newValue;
+                      });
+                      _countController.text = newValue.toString();
+                    },
                   ),
 
                   const SizedBox(
