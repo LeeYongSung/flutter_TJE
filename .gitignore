@@ -95,6 +95,13 @@ lib/generated_plugin_registrant.dart
 
 # End of https://www.toptal.com/developers/gitignore/api/flutter,dart
 
+<<<<<<< HEAD
 # vscode
 .vscode
 .vscode/
+=======
+
+# vscode
+.vscode
+.vscode/
+>>>>>>> b465d22b602fb5946011b8d95b41f816b894bb6b
